@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>MBTI 성격 유형 테스트</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #f0f8ff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+        .question {
+            margin-bottom: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .desc {
+            font-size: 14px;
+            margin-bottom: 15px;
+            color: #555;
+        }
+        .choice {
+            display: inline-block;
+            margin: 10px;
+            padding: 12px 20px;
+            background: #ffb347;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            color: white;
+            transition: background 0.3s;
+        }
+        .choice:hover {
+            background: #ffa726;
+        }
+        @media (max-width: 600px) {
+            .choice {
+                font-size: 16px;
+                padding: 10px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="card" id="quizBox">
+    <h1>🧠 MBTI 테스트 🧠</h1>
+    <p>시작하려면 아래 버튼을 눌러주세요!</p>
+    <button class="choice" onclick="startQuiz()">테스트 시작</button>
+</div>
+
+<script>
+    const questions = [
+        { q: "당신은 I인가요, E인가요?", a: ["I", "E"], d: ["이것은 아이라고 합니다", "이거슨 이라고 합니다"] },
+        { q: "당신은 N인가요, S인가요?", a: ["N", "S"], d: ["이거슨 엔이랍니다", "이거슨 에스고요"] },
+        { q: "당신은 T인가요, F인가요?", a: ["T", "F"], d: ["이것은 티랍니다", "이것은 에프입니다"] },
+        { q: "당신은 J인가요, P인가요?", a: ["J", "P"], d: ["이것은 제이라고 합니다", "이것은 피입니다"] }
+    ];
+
+    let current = 0;
+    let selections = [];
+
+    function startQuiz() {
+        showQuestion();
+    }
+
+    function showQuestion() {
+        if (current >= questions.length) {
+            showResult();
+            return;
+        }
+
+        const quizBox = document.getElementById("quizBox");
+        const q = questions[current];
+
+        quizBox.innerHTML = `
+            <div class='question'>${q.q}</div>
+            <div class='desc'>${q.d[0]}</div>
+            <button class='choice' onclick="select('${q.a[0]}')">${q.a[0]}</button>
+            <div class='desc'>${q.d[1]}</div>
+            <button class='choice' onclick="select('${q.a[1]}')">${q.a[1]}</button>
+        `;
+    }
+
+    function select(answer) {
+        selections.push(answer);
+        current++;
+        showQuestion();
+    }
+
+    function showResult() {
+        const type = selections.join('');
+        document.getElementById("quizBox").innerHTML = `
+            <h2>당신의 결과는?</h2>
+            <p>${type} 입니다 너무 찰떡맞아버렸죠?!!!</p>
+            <button class='choice' onclick="showDetails('${type}')"> ${type} 에 대해 더 알아보기</button>
+            <button class='choice' onclick="location.reload()">다시 하기</button>
+        `;
+    }
+
+function showDetails(type) {
+    const explanations = {
+         INFP: "INFP는 인프피라고 합니다. 잘 아시겠죠?",
+    INFJ: "INFJ는 인프제라고 합니다.잘 아시겠죠?",
+    ENFP: "ENFP는 엔프피라고 합니다.잘 아시겠죠?",
+    ENFJ: "ENFJ는 엔프제라고 합니다.잘 아시겠죠?",
+    ISFP: "ISFP는 잇프피라고 합니다.잘 아시겠죠?",
+    ISFJ: "ISFJ는 잇프제라고 합니다.잘 아시겠죠?",
+    ESFP: "ESFP는 에스프피라고 합니다.잘 아시겠죠?",
+    ESFJ: "ESFJ는 에스프제라고 합니다.잘 아시겠죠?",
+    INTP: "INTP는 인팁이라고 합니다.잘 아시겠죠?",
+    INTJ: "INTJ는 인티제라고 합니다.잘 아시겠죠?",
+    ENTP: "ENTP는 엔팁이라고 합니다.잘 아시겠죠?",
+    ENTJ: "ENTJ는 엔티제라고 합니다.잘 아시겠죠?",
+    ISTP: "ISTP는 잇팁이라고 합니다.잘 아시겠죠?",
+    ISTJ: "ISTJ는 잇티제라고 합니다.잘 아시겠죠?",
+    ESTP: "ESTP는 에스팁이라고 합니다.잘 아시겠죠?",
+    ESTJ: "ESTJ는 에스티제라고 합니다.잘 아시겠죠?"
+    };
+
+    const text = explanations[type] || "이 유형에 대한 해설은 직접 알아보시기로 하면 너무 좋을거같아요（＾∀＾●）ﾉｼ!";
+    document.getElementById("quizBox").innerHTML = `
+        <h2>${type} 에 대해 더 알아보기</h2>
+        <p>${text}</p>
+        <button class='choice' onclick="location.reload()">다시 하기</button>
+    `;
+}
+</script>
+
+</body>
+</html>
