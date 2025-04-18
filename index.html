@@ -18,8 +18,8 @@
             padding: 30px;
             border-radius: 20px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            max-width: 400px;
-            width: 90%;
+            max-width: 90%;
+            width: 400px;
             text-align: center;
         }
         .question {
@@ -35,22 +35,33 @@
         .choice {
             display: inline-block;
             margin: 10px;
-            padding: 12px 20px;
+            padding: 15px 25px;
             background: #ffb347;
             border: none;
             border-radius: 10px;
             cursor: pointer;
-            font-size: 18px;
+            font-size: 20px;
             color: white;
             transition: background 0.3s;
+            width: 100%;
+            box-sizing: border-box;
         }
         .choice:hover {
             background: #ffa726;
         }
         @media (max-width: 600px) {
+            .card {
+                padding: 20px;
+            }
             .choice {
-                font-size: 16px;
-                padding: 10px 16px;
+                font-size: 18px;
+                padding: 12px 20px;
+            }
+            .question {
+                font-size: 18px;
+            }
+            .desc {
+                font-size: 12px;
             }
         }
     </style>
@@ -112,33 +123,33 @@
         `;
     }
 
-function showDetails(type) {
-    const explanations = {
-         INFP: "INFP는 인프피라고 합니다. 잘 아시겠죠?",
-    INFJ: "INFJ는 인프제라고 합니다.잘 아시겠죠?",
-    ENFP: "ENFP는 엔프피라고 합니다.잘 아시겠죠?",
-    ENFJ: "ENFJ는 엔프제라고 합니다.잘 아시겠죠?",
-    ISFP: "ISFP는 잇프피라고 합니다.잘 아시겠죠?",
-    ISFJ: "ISFJ는 잇프제라고 합니다.잘 아시겠죠?",
-    ESFP: "ESFP는 에스프피라고 합니다.잘 아시겠죠?",
-    ESFJ: "ESFJ는 에스프제라고 합니다.잘 아시겠죠?",
-    INTP: "INTP는 인팁이라고 합니다.잘 아시겠죠?",
-    INTJ: "INTJ는 인티제라고 합니다.잘 아시겠죠?",
-    ENTP: "ENTP는 엔팁이라고 합니다.잘 아시겠죠?",
-    ENTJ: "ENTJ는 엔티제라고 합니다.잘 아시겠죠?",
-    ISTP: "ISTP는 잇팁이라고 합니다.잘 아시겠죠?",
-    ISTJ: "ISTJ는 잇티제라고 합니다.잘 아시겠죠?",
-    ESTP: "ESTP는 에스팁이라고 합니다.잘 아시겠죠?",
-    ESTJ: "ESTJ는 에스티제라고 합니다.잘 아시겠죠?"
-    };
+    function showDetails(type) {
+        const explanations = {
+             INFP: "INFP는 인프피라고 합니다. 잘 아시겠죠?",
+            INFJ: "INFJ는 인프제라고 합니다.잘 아시겠죠?",
+            ENFP: "ENFP는 엔프피라고 합니다.잘 아시겠죠?",
+            ENFJ: "ENFJ는 엔프제라고 합니다.잘 아시겠죠?",
+            ISFP: "ISFP는 잇프피라고 합니다.잘 아시겠죠?",
+            ISFJ: "ISFJ는 잇프제라고 합니다.잘 아시겠죠?",
+            ESFP: "ESFP는 에스프피라고 합니다.잘 아시겠죠?",
+            ESFJ: "ESFJ는 에스프제라고 합니다.잘 아시겠죠?",
+            INTP: "INTP는 인팁이라고 합니다.잘 아시겠죠?",
+            INTJ: "INTJ는 인티제라고 합니다.잘 아시겠죠?",
+            ENTP: "ENTP는 엔팁이라고 합니다.잘 아시겠죠?",
+            ENTJ: "ENTJ는 엔티제라고 합니다.잘 아시겠죠?",
+            ISTP: "ISTP는 잇팁이라고 합니다.잘 아시겠죠?",
+            ISTJ: "ISTJ는 잇티제라고 합니다.잘 아시겠죠?",
+            ESTP: "ESTP는 에스팁이라고 합니다.잘 아시겠죠?",
+            ESTJ: "ESTJ는 에스티제라고 합니다.잘 아시겠죠?"
+        };
 
-    const text = explanations[type] || "이 유형에 대한 해설은 직접 알아보시기로 하면 너무 좋을거같아요（＾∀＾●）ﾉｼ!";
-    document.getElementById("quizBox").innerHTML = `
-        <h2>${type} 에 대해 더 알아보기</h2>
-        <p>${text}</p>
-        <button class='choice' onclick="location.reload()">다시 하기</button>
-    `;
-}
+        const text = explanations[type] || "이 유형에 대한 해설은 직접 알아보시기로 하면 너무 좋을거같아요（＾∀＾●）ﾉｼ!";
+        document.getElementById("quizBox").innerHTML = `
+            <h2>${type} 에 대해 더 알아보기</h2>
+            <p>${text}</p>
+            <button class='choice' onclick="location.reload()">다시 하기</button>
+        `;
+    }
 </script>
 
 </body>
